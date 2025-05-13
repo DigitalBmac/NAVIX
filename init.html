@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicializando</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .spinner {
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-left-color: #3b82f6;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <!-- Cabeçalho com Ícone -->
+  <div class="bg-blue-500 text-white p-4 flex items-center justify-between">
+    <div class="flex items-center">
+      <img src="NAVIX.ico" alt="Ícone" class="h-20 w-20 mr-2">
+      <div class="text-xl font-semibold">NAVIX</div>
+    </div>
+    <div></div>
+  </div>
+
+  <!-- Conteúdo Central -->
+  <div class="flex-grow flex flex-col items-center justify-center">
+    <img src="NAVIX.png" alt="Logo" class="h-90 mb-4">
+    <div id="spinner" class="spinner"></div>
+    <p id="loading-message" class="mt-4 text-lg text-gray-700">Carregando banco de dados...</p>
+    <button id="login-button" class="hidden bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 mt-4">Acessar Sistema</button>
+    <br><p>Desenvolvido por CVMY</p>
+  </div>
+
+  <script>
+    const loginButton = document.getElementById('login-button');
+    const spinner = document.getElementById('spinner');
+    const loadingMessage = document.getElementById('loading-message');
+
+    if (!loginButton || !spinner || !loadingMessage) {
+      console.error('Elementos não encontrados:', { loginButton, spinner, loadingMessage });
+    } else {
+      // Mostrar botão e esconder carregamento após 5 segundos
+      setTimeout(() => {
+        loginButton.classList.remove('hidden');
+        spinner.classList.add('hidden');
+        loadingMessage.classList.add('hidden');
+        console.log('Botão Acessar Sistema exibido, spinner e mensagem escondidos');
+      }, 5000);
+
+      // Adicionar evento de clique
+      loginButton.addEventListener('click', () => {
+        console.log('Botão Acessar Sistema clicado');
+        window.location.href = 'index.html';
+      });
+    }
+  </script>
+</body>
+</html>

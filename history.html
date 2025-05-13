@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <!-- Cabeçalho Azul com Ícone -->
+  <div class="bg-blue-500 text-white p-4 flex items-center justify-between">
+    <div class="flex items-center">
+      <img src="logo.png" alt="Ícone" class="h-8 w-8 mr-2">
+      <div class="text-xl font-semibold">NAVIX</div>
+    </div>
+    <div class="flex items-center">
+      <span id="user-name" class="text-white font-semibold"></span>
+      <button onclick="logout()" class="bg-blue-700 text-white px-3 py-1 rounded hover:bg-blue-800 ml-2">Logout</button>
+    </div>
+  </div>
+
+  <div class="container mx-auto p-4">
+    <!-- Botões Alinhados à Direita -->
+    <div class="flex space-x-4 justify-end mb-6">
+      <button onclick="window.location.href='dashboard.html'" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Dashboard</button>
+      <button onclick="window.location.href='history.html'" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Ver Histórico</button>
+      <button onclick="window.location.href='equipment-details.html'" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Ver Equipamentos</button>
+    </div>
+
+    <!-- Histórico -->
+    <div id="history" class="bg-white p-6 rounded-lg shadow-md">
+      <p class="text-gray-600">Carregando histórico...</p>
+    </div>
+  </div>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Página oculta para desenvolvedores do sistema de controle de equipamentos.">
+  <meta name="keywords" content="developer, controle de equipamentos, administração">
+  <title>Developer - Controle de Equipamentos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="max-w-5xl mx-auto p-3">
+    <div class="flex justify-end mb-4">
+      <button onclick="logout()" class="bg-gray-500 text-white px-4 py-1 rounded hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 text-sm">
+        Sair
+      </button>
+    </div>
+    <h1 class="text-2xl font-bold mb-4 text-center">Painel do Desenvolvedor</h1>
+    <div id="error-message" class="text-red-500 text-center mb-2 hidden text-sm"></div>
+    <div id="success-message" class="text-green-500 text-center mb-2 hidden text-sm"></div>
+    <div class="space-y-4">
+      <!-- Zerar Histórico -->
+      <div class="bg-white p-3 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold mb-2">Zerar Histórico</h2>
+        <button onclick="clearHistory()" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
+          Zerar Histórico
+        </button>
+      </div>
+      <!-- Gerenciar Registros -->
+      <div class="bg-white p-3 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold mb-2">Gerenciar Registros</h2>
+        <button onclick="deleteSelectedRecords()" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 mb-2 text-sm">
+          Excluir Selecionados
+        </button>
+        <div class="overflow-x-auto">
+          <table id="history-table" class="min-w-full bg-white border text-sm">
+            <thead>
+              <tr class="bg-gray-100">
+                <th class="px-2 py-1 border"><input type="checkbox" id="select-all" onclick="toggleSelectAll()"></th>
+                <th class="px-2 py-1 border">Equipamento</th>
+                <th class="px-2 py-1 border">Data</th>
+                <th class="px-2 py-1 border">Motivo</th>
+                <th class="px-2 py-1 border">Tipo</th>
+                <th class="px-2 py-1 border">Ações</th>
+              </tr>
+            </thead>
+            <tbody id="history-records"></tbody>
+          </table>
+        </div>
+      </div>
+      <!-- Adicionar Equipamento -->
+      <div class="bg-white p-3 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold mb-2">Adicionar Equipamento</h2>
+        <div class="space-y-2">
+          <div>
+            <label for="equip-name" class="block text-sm font-medium text-gray-700">Nome</label>
+            <input type="text" id="equip-name" class="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="Ex.: Empilhadeira 05">
+          </div>
+          <div>
+            <label for="equip-type" class="block text-sm font-medium text-gray-700">Tipo</label>
+            <input type="text" id="equip-type" class="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="Ex.: Empilhadeira">
+          </div>
+          <div>
+            <label for="equip-status" class="block text-sm font-medium text-gray-700">Status</label>
+            <select id="equip-status" class="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm">
+              <option value="Disponível">Disponível</option>
+              <option value="Indisponível">Indisponível</option>
+              <option value="Manutenção">Manutenção</option>
+              <option value="Inspeção">Inspeção</option>
+            </select>
+          </div>
+          <div>
+            <label for="equip-hourmeter" class="block text-sm font-medium text-gray-700">Horímetro (h)</label>
+            <input type="number" id="equip-hourmeter" class="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="Ex.: 100" min="0">
+          </div>
+          <button onclick="addEquipment()" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+            Adicionar
+          </button>
+        </div>
+      </div>
+      <!-- Adicionar Usuário -->
+      <div class="bg-white p-3 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold mb-2">Adicionar Usuário</h2>
+        <div class="space-y-2">
+          <div>
+            <label for="user-username" class="block text-sm font-medium text-gray-700">Usuário</label>
+            <input type="text" id="user-username" class="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="Ex.: operacao2">
+          </div>
+          <div>
+            <label for="user-password" class="block text-sm font-medium text-gray-700">Senha</label>
+            <input type="password" id="user-password" class="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm" placeholder="Digite a senha">
+          </div>
+          <div>
+            <label for="user-type" class="block text-sm font-medium text-gray-700">Tipo</label>
+            <select id="user-type" class="mt-1 block w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm">
+              <option value="operacao">Operação</option>
+              <option value="admin">Administração</option>
+            </select>
+          </div>
+          <button onclick="addUser()" class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm">
+            Adicionar
+          </button>
+        </div>
+      </div>
+      <!-- Remover Usuário -->
+      <div class="bg-white p-3 rounded-lg shadow-md">
+        <h2 class="text-lg font-semibold mb-2">Remover Usuário</h2>
+        <div class="space-y-2">
+          <select id="user-to-remove" class="w-full px-2 py-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 text-sm"></select>
+          <button onclick="removeUser()" class="bg-red-500 text-white px-4 py-1 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500 text-sm">
+            Remover
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="developer.js"></script>
+</body>
+</html>

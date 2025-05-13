@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+  <!-- Cabeçalho com Ícone -->
+  <div class="bg-blue-500 text-white p-4 flex items-center justify-between">
+    <div class="flex items-center">
+      <img src="NAVIX.ico" alt="Ícone" class="h-20 w-20 mr-2">
+      <div class="text-xl font-semibold">NAVIX</div>
+    </div>
+    <div></div>
+  </div>
+
+  <!-- Formulário com Logo -->
+  <div class="flex-grow flex flex-col items-center justify-center">
+    <img id="logo" src="NAVIX.png" alt="Logo" class="h-50 mb-4 mx-auto">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+      <h2 class="text-2xl font-semibold mb-4 text-center">Núcleo de Avaliação da Disponibilidade de Equipamentos Portuários</h2>
+      <form id="login-form" class="space-y-4">
+        <div>
+          <label for="username" class="block text-sm font-medium text-gray-700">Usuário</label>
+          <input list="usernames" id="username" autocomplete="off" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Selecione ou digite o usuário">
+          <datalist id="usernames"></datalist>
+        </div>
+        <div>
+          <label for="password" class="block text-sm font-medium text-gray-700">Senha</label>
+          <input type="password" id="password" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" placeholder="Digite sua senha">
+        </div>
+        <button type="submit" class="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html>
